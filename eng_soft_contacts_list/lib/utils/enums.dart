@@ -1,0 +1,4 @@
+enum FieldType {
+  password,
+  text
+}
