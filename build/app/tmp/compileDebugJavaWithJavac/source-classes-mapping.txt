@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/example/engsoftcontacts/eng_soft_contacts_list/BuildConfig.java
+ com.example.engsoftcontacts.eng_soft_contacts_list.BuildConfig
