@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:eng_soft_contacts_list/ui/components/custom_button.dart';
 import 'package:eng_soft_contacts_list/ui/components/login_field.dart';
+import 'package:eng_soft_contacts_list/utils/firebaseAuthHelper.dart';
 import 'package:eng_soft_contacts_list/utils/styles.dart';
 import 'package:eng_soft_contacts_list/utils/enums.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  final TextEditingController userController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+
   @override
   void initState() {
     super.initState();
@@ -73,19 +80,28 @@ class LoginPageState extends State<LoginPage> {
                 height: 25,
               ),
               LoginField(FieldType.text, "Email", Colors.orangeAccent,
-                  CustomStyles.defaultWhiteText, 0.725),
+                  CustomStyles.defaultWhiteText, 0.725, userController),
               Flexible(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     LoginField(FieldType.password, "Senha", Colors.orange,
-                        CustomStyles.defaultWhiteText, 0.425),
+                        CustomStyles.defaultWhiteText, 0.425, passwordController),
                     SizedBox(
                       width: 5,
                     ),
                     CustomButton(
-                        () {}, Text("Confirmar"), Colors.orange, 20, 10),
+                        () async {
+                          print(userController);
+                          print(passwordController);
+                          User? user = await FirebaseAuthHelper().signInWith(userController.text, passwordController.text);
+                          if (user != null) {
+                            print("Go to main page");
+                          } else {
+                            print("erro ao completar um login");
+                          }
+                        }, Text("Confirmar"), Colors.orange, 10, 15),
                     SizedBox(
                       width: 5,
                     ),

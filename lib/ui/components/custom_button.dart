@@ -8,7 +8,7 @@ class CustomButton extends StatelessWidget {
   double verticalPadding;
   double horizontalPadding;
 
-  CustomButton(this.callback, this.btnChild, this.btnColor, this.verticalPadding, this.horizontalPadding);
+  CustomButton(this.callback, this.btnChild, this.btnColor, this.horizontalPadding, this.verticalPadding);
 
   @override
   Widget build(BuildContext context) {
