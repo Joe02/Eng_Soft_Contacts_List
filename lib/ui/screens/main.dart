@@ -1,5 +1,7 @@
+import 'package:eng_soft_contacts_list/ui/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -17,7 +19,11 @@ class MyApp extends StatelessWidget {
           future: Firebase.initializeApp(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return LoginPage();
+              if (FirebaseAuth.instance.currentUser != null) {
+                return HomeScreen();
+              } else {
+                return LoginScreen();
+              }
             } else {
               return Container();
             }

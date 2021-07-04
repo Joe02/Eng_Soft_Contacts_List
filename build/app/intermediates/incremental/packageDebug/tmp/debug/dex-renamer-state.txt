@@ -1,4 +1,4 @@
-#Sat Jul 03 15:42:20 BRT 2021
+#Sun Jul 04 13:53:40 BRT 2021
 base.0=/home/lala/Desktop/Eng_Soft_Contacts_List/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
