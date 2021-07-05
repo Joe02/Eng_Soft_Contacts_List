@@ -8,13 +8,14 @@ class LoginField extends StatefulWidget {
   var containerColor;
   var fieldTextStyle;
   var fieldWidth;
+  var userController;
 
   LoginField(this.fieldType, this.hint, this.containerColor,
-      this.fieldTextStyle, this.fieldWidth);
+      this.fieldTextStyle, this.fieldWidth, this.userController);
 
   @override
   LoginFieldState createState() => LoginFieldState(
-      fieldType, hint, containerColor, fieldTextStyle, fieldWidth);
+      fieldType, hint, containerColor, fieldTextStyle, fieldWidth, userController);
 }
 
 class LoginFieldState extends State<LoginField> {
@@ -23,6 +24,7 @@ class LoginFieldState extends State<LoginField> {
   var containerColor;
   var fieldTextStyle;
   var fieldWidth;
+  var userController;
 
   LoginFieldState(
     this.fieldType,
@@ -30,6 +32,7 @@ class LoginFieldState extends State<LoginField> {
     this.containerColor,
     this.fieldTextStyle,
     this.fieldWidth,
+    this.userController
   );
 
   @override
@@ -40,10 +43,11 @@ class LoginFieldState extends State<LoginField> {
     return Container(
       width: screenWidth * fieldWidth,
       margin: EdgeInsets.all(5),
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       decoration: BoxDecoration(
           color: containerColor, borderRadius: BorderRadius.circular(15.0)),
       child: TextField(
+        controller: userController,
         style: fieldTextStyle,
         obscureText: fieldType == FieldType.text ? false : true,
         decoration: InputDecoration(

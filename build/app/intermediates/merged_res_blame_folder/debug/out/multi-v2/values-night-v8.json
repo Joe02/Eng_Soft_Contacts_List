@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/lala/StudioProjects/eng_soft_contacts_list/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/home/lala/Desktop/Eng_Soft_Contacts_List/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/home/lala/StudioProjects/eng_soft_contacts_list/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/lala/Desktop/Eng_Soft_Contacts_List/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

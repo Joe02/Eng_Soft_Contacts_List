@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "874552761744",
+    "project_id": "engsoftcontactslist",
+    "storage_bucket": "engsoftcontactslist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874552761744:android:bc5ff53606ec10d6a76715",
+        "android_client_info": {
+          "package_name": "com.example.engsoftcontacts.eng_soft_contacts_list"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874552761744-177e0o4nd5ljp2ij7friq87bo8qfuvdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiVoOtiNWp9Ji_2wcyVzL81bipJdys19Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874552761744-177e0o4nd5ljp2ij7friq87bo8qfuvdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
