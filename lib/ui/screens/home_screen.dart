@@ -13,6 +13,7 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
+    bool isLoadingARequest = false;
 
     return FutureBuilder(
       future: loadUser(),
@@ -44,11 +45,15 @@ class HomeScreenState extends State<HomeScreen> {
                       child: Card(
                         elevation: 5.0,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15))),
+                            borderRadius: BorderRadius.circular(15)),
                         child: Row(
-                          children: [],
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 8.0),
+                              child: Icon(Icons.search),
+                            )
+                          ],
                         ),
                       ),
                     ),
@@ -70,7 +75,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   String? getUserName() {
-    if (FirebaseAuth.instance.currentUser!.displayName == null && FirebaseAuth.instance.currentUser!.displayName == "") {
+    if (FirebaseAuth.instance.currentUser!.displayName == null || FirebaseAuth.instance.currentUser!.displayName == "") {
       return FirebaseAuth.instance.currentUser!.email;
     } else {
       FirebaseAuth.instance.currentUser!.displayName;
