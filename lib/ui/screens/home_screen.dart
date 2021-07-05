@@ -70,7 +70,7 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   String? getUserName() {
-    if (FirebaseAuth.instance.currentUser!.displayName != null && FirebaseAuth.instance.currentUser!.displayName == "") {
+    if (FirebaseAuth.instance.currentUser!.displayName == null && FirebaseAuth.instance.currentUser!.displayName == "") {
       return FirebaseAuth.instance.currentUser!.email;
     } else {
       FirebaseAuth.instance.currentUser!.displayName;
