@@ -38,6 +38,7 @@ android {
         applicationId "com.example.engsoftcontacts.eng_soft_contacts_list"
         minSdkVersion 16
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
