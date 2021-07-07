@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.engsoftcontacts.eng_soft_contacts_list">
    <application
-        android:label="eng_soft_contacts_list"
+        android:label="Minha agenda"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

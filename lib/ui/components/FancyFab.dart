@@ -1,11 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FancyFab extends StatefulWidget {
   final Function() onPressed;
   final String tooltip;
   final IconData icon;
+  final void Function() contactCallback;
+  final void Function() groupCallback;
 
-  FancyFab({required this.onPressed, required this.tooltip, required this.icon});
+  FancyFab({
+    required this.onPressed,
+    required this.tooltip,
+    required this.icon,
+    required this.contactCallback,
+    required this.groupCallback,
+  });
 
   @override
   _FancyFabState createState() => _FancyFabState();
@@ -24,10 +33,10 @@ class _FancyFabState extends State<FancyFab>
   @override
   initState() {
     _animationController =
-    AnimationController(vsync: this, duration: Duration(milliseconds: 500))
-      ..addListener(() {
-        setState(() {});
-      });
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
+          ..addListener(() {
+            setState(() {});
+          });
     _animateIcon =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
     _buttonColor = AlwaysStoppedAnimation<Color>(Colors.orange);
@@ -65,7 +74,7 @@ class _FancyFabState extends State<FancyFab>
       child: FloatingActionButton(
         backgroundColor: Colors.orange[400],
         onPressed: () {
-          ///TODO Add navigation to createContactScreen()
+          widget.contactCallback();
         },
         tooltip: 'Criar contato',
         child: Icon(Icons.person_add),
@@ -78,7 +87,7 @@ class _FancyFabState extends State<FancyFab>
       child: FloatingActionButton(
         backgroundColor: Colors.orange[500],
         onPressed: () {
-          ///TODO Add navigation to createGroupScreen()
+          widget.groupCallback();
         },
         tooltip: 'Criar grupo',
         child: Icon(Icons.group_add_rounded),
