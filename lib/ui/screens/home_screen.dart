@@ -155,7 +155,7 @@ class HomeScreenState extends State<HomeScreen> {
                       FirebaseFirestore.instance
                           .collection(
                               "${FirebaseAuth.instance.currentUser!.email}_contatos")
-                          .add({
+                          .doc('${contactNumber.text.isEmpty ? "" : contactNumber.text}').set({
                         'nome do contato': '${contactName.text.isEmpty ? "" : contactName.text}',
                         'número do contato': '${contactNumber.text.isEmpty ? "" : contactNumber.text}',
                         'notas sobre contato': '${contactNotes.text.isEmpty ? "" : contactNotes.text}',
