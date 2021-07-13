@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eng_soft_contacts_list/ui/components/FancyFab.dart';
 import 'package:eng_soft_contacts_list/ui/components/contacts_list.dart';
+import 'package:eng_soft_contacts_list/ui/components/groups_list.dart';
 import 'package:eng_soft_contacts_list/ui/screens/login_screen.dart';
 import 'package:eng_soft_contacts_list/utils/strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,7 +18,7 @@ class HomeScreenState extends State<HomeScreen> {
   var userName = "";
   final TextEditingController contactName = TextEditingController();
   final TextEditingController contactNumber = TextEditingController();
-  final TextEditingController contactBirthday = TextEditingController();
+  final TextEditingController contactCEP = TextEditingController();
   final TextEditingController contactNotes = TextEditingController();
   bool isLoadingARequest = false;
   var selectedDate = DateTime.now();
@@ -30,18 +31,24 @@ class HomeScreenState extends State<HomeScreen> {
     return FutureBuilder(
       future: loadUser(),
       builder: (context, snapshot) {
-        return Scaffold(
-          appBar: buildAppBar(),
-          floatingActionButton: FancyFab(
-            onPressed: () {},
-            icon: Icons.add,
-            tooltip: 'Adicionar contato ou grupo.',
-            contactCallback: showContactModal,
-            groupCallback: showGroupModal,
-          ),
-          body: Center(
-            child: Container(
-              child: ContactsList(userName),
+        return MaterialApp(
+          home: DefaultTabController(
+            length: 2,
+            child: Scaffold(
+              appBar: buildAppBar(),
+              floatingActionButton: FancyFab(
+                onPressed: () {},
+                icon: Icons.add,
+                tooltip: 'Adicionar contato ou grupo.',
+                contactCallback: showContactModal,
+                groupCallback: showGroupModal,
+              ),
+              body: TabBarView(
+                children: <Widget>[
+                  ContactsList(getUserName()),
+                  GroupsList(getUserName())
+                ],
+              ),
             ),
           ),
         );
@@ -52,7 +59,10 @@ class HomeScreenState extends State<HomeScreen> {
   buildAppBar() {
     return AppBar(
       backgroundColor: Colors.orange,
-      title: Text("Olá, ${getUserName()}", style: TextStyle(color: Colors.white),),
+      title: Text(
+        "Olá, ${getUserName()}",
+        style: TextStyle(color: Colors.white),
+      ),
       actions: [
         IconButton(
             onPressed: () {
@@ -64,6 +74,18 @@ class HomeScreenState extends State<HomeScreen> {
             },
             icon: Icon(Icons.logout))
       ],
+      bottom: TabBar(
+        tabs: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Contatos", style: TextStyle(fontSize: 18, color: Colors.white),),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Grupos", style: TextStyle(fontSize: 18, color: Colors.white),),
+          ),
+        ],
+      ),
     );
   }
 
@@ -142,12 +164,13 @@ class HomeScreenState extends State<HomeScreen> {
                       _selectDate(context);
                     },
                     child: TextField(
-                      keyboardType: TextInputType.datetime,
+                      keyboardType: TextInputType.number,
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(8),
                       ],
-                      controller: contactBirthday,
-                      decoration: InputDecoration(hintText: "Data de nascimento"),
+                      controller: contactCEP,
+                      decoration:
+                          InputDecoration(hintText: "CEP"),
                     ),
                   ),
                   TextButton(
@@ -155,17 +178,23 @@ class HomeScreenState extends State<HomeScreen> {
                       FirebaseFirestore.instance
                           .collection(
                               "${FirebaseAuth.instance.currentUser!.email}_contatos")
-                          .doc('${contactNumber.text.isEmpty ? "" : contactNumber.text}').set({
-                        'nome do contato': '${contactName.text.isEmpty ? "" : contactName.text}',
-                        'número do contato': '${contactNumber.text.isEmpty ? "" : contactNumber.text}',
-                        'notas sobre contato': '${contactNotes.text.isEmpty ? "" : contactNotes.text}',
-                        'data de nascimento': '${contactBirthday.text.isEmpty ? "" : contactBirthday.text}'
+                          .doc(
+                              '${contactNumber.text.isEmpty ? "" : contactNumber.text}')
+                          .set({
+                        'nome do contato':
+                            '${contactName.text.isEmpty ? "" : contactName.text}',
+                        'número do contato':
+                            '${contactNumber.text.isEmpty ? "" : contactNumber.text}',
+                        'notas sobre contato':
+                            '${contactNotes.text.isEmpty ? "" : contactNotes.text}',
+                        'CEP':
+                            '${contactCEP.text.isEmpty ? "" : contactCEP.text}'
                       });
+                      Navigator.of(context).pop();
                       contactName.clear();
                       contactNumber.clear();
                       contactNotes.clear();
-                      contactBirthday.clear();
-                      Navigator.of(context).pop();
+                      contactCEP.clear();
                     },
                     child: Text(CustomStrings.confirmLabel),
                   )
@@ -206,9 +235,11 @@ class HomeScreenState extends State<HomeScreen> {
                       FirebaseFirestore.instance
                           .collection(
                               "${FirebaseAuth.instance.currentUser!.email}_grupos")
-                          .add({
+                          .doc("${groupName.text}")
+                          .set({
                         'nome do grupo': '${groupName.text}',
-                        'descrição do grupo': '${groupDescription.text}'
+                        'descrição do grupo': '${groupDescription.text}',
+                        'membros': FieldValue.arrayUnion([])
                       });
                       groupName.clear();
                       groupDescription.clear();
@@ -232,7 +263,7 @@ class HomeScreenState extends State<HomeScreen> {
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate)
       setState(() {
-        contactBirthday.text = "${picked.day}/${picked.month}/${picked.year}";
+        contactCEP.text = "${picked.day}/${picked.month}/${picked.year}";
         selectedDate = picked;
       });
   }
