@@ -1,6 +1,9 @@
 import 'package:eng_soft_contacts_list/ui/screens/home_screen.dart';
+import 'package:eng_soft_contacts_list/utils/providers/contact_provider.dart';
+import 'package:eng_soft_contacts_list/utils/providers/group_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'ui/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 void main() async {
@@ -14,19 +17,25 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: FutureBuilder(
-          future: Firebase.initializeApp(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (FirebaseAuth.instance.currentUser != null) {
-                return HomeScreen();
+        home: MultiProvider(
+          providers: [
+            ListenableProvider<ContactProvider>(create: (_) => ContactProvider()),
+            ListenableProvider<GroupProvider>(create: (_) => GroupProvider()),
+          ],
+          child: FutureBuilder(
+            future: Firebase.initializeApp(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (FirebaseAuth.instance.currentUser != null) {
+                  return HomeScreen();
+                } else {
+                  return LoginScreen();
+                }
               } else {
-                return LoginScreen();
+                return Container();
               }
-            } else {
-              return Container();
-            }
-          },
+            },
+          ),
         ));
   }
 }
