@@ -19,6 +19,7 @@ Draw.io: https://app.diagrams.net <br>
 > Também é possível baixar o aplicativo através da pasta '**Build/App/Outputs/apk/debug/**' baixando o arquivo app-debug.apk
 
 ## 1) Elaborar o documento de especificação de requisitos com base no modelo disponibilizado pelo professor. 
+### Funcionais
 > ## Contato
 - [X] Criar contato
 - [X] Deletar contato
@@ -38,6 +39,13 @@ Draw.io: https://app.diagrams.net <br>
 > ## Cadastro
 - [X] Criar conta
 
+### Não funcionais
+- O usuário deve coneguir realizar o login por meio da sua conta
+- O usuário deve conseguir criar novas contas a partir do cadastro
+- O Usuário deve conseguir visualizar todos os seus contatos independente de qual dispositivo ele está usando
+- O usuário deve conseguir visualizar todos os seus grupos independente de qual dispositivo ele está usando
+- O usuário deve conseguir criar, editar e deletar qualquer contato ou grupo que ele possuir
+
 ## 2) Wireframe
 ![image](https://user-images.githubusercontent.com/42116724/125640690-e8bffe1b-175b-4aa0-b17d-407ed580d275.png)
 ![image](https://user-images.githubusercontent.com/42116724/125640721-74e5a3aa-28a3-4c92-95b4-d501c63527db.png)
@@ -47,6 +55,143 @@ Draw.io: https://app.diagrams.net <br>
 ## 3) UML
 a) Casos de uso
 ![Diagrama de casos de uso](https://user-images.githubusercontent.com/42116724/125643454-6cdff0c6-37a0-4901-bec8-a2250de4a0ba.png)
+> **Caso de uso: Fazer login**
+
+Fluxo principal:
+1. usuário: insere e envia informações de login.
+2. sistema: verifica email e senha informadas.
+3. sistema: exibe tela inicial(Aba de contatos).
+
+Fluxo alternativo:
+1. usuário: insere e envia informações de login.
+2. sistema: verifica email e senha informadas.
+3. sistema: exibe mensagem de erro.
+
+
+
+> **Caso de uso: Fazer cadastro**
+
+Fluxo principal:
+1. usuário: clica no botão "Criar conta".
+2. sistema: exibe tela de cadastro.
+3. usuário: insere e envia informações de cadastro.
+4. sistema: verifica se email e senha atendem aos requisitos de cadastro.
+5. sistema: efetua login automatico na conta criada.
+
+Fluxo alternativo:
+1. usuário: clica no botão "Criar conta".
+2. sistema: exibe tela de cadastro.
+3. usuário: insere e envia informações de cadastro.
+4. sistema: verifica se email e senha atendem aos requisitos de cadastro.
+5. sistema: exibe mensagem de erro.
+
+
+
+> **Caso de uso: Recuperar senha**
+
+Fluxo principal:
+1. usuário: clica no botão "Esqueci minha senha".
+2. sistema: exibe janela de recuperação de senha.
+3. usuário: insere e confirma email de recuperação.
+4. sistema: verifica se email está cadastrado.
+5. sistema: envia email de recuperação de senha para email cadastrado.
+
+Fluxo alternativo:
+1. usuário: clica no botão "Esqueci minha senha".
+2. sistema: exibe janela de recuperação de senha.
+3. usuário: insere e confirma email de recuperação.
+4. sistema: verifica se email está cadastrado.
+5. sistema: exibe mensagem de erro.
+
+
+
+> **Caso de uso: Criar contato**
+
+Condição: Usuário logado.
+
+Fluxo principal:
+1. usuário: clica no botão de menu.
+2. usuário: clica no botão de criação de contato.
+3. sistema: exibe janela de criação de contato.
+4. usuário: insere e confirma informações de contato.
+5. sistema: atualiza lista de contatos no banco de dados.
+6. sistema: fecha janela de criação de contato.
+
+
+Fluxo alternativo:
+1. usuário: clica no botão de menu.
+2. usuário: clica no botão de criação de contato.
+3. sistema: exibe janela de criação de contato.
+4. usuário: cancela criação de contato.
+5. sistema: fecha janela de criação de contato.
+
+
+
+> **Caso de uso: Criar grupo**
+
+Condição: Usuário logado.
+
+Fluxo principal:
+1. usuário: clica no botão de menu.
+2. usuário: clica no botão de criação de grupo.
+3. sistema: exibe janela de criação de grupo.
+4. usuário: insere e confirma informações de grupo.
+5. sistema: atualiza lista de grupos no banco de dados.
+6. sistema: fecha janela de criação de grupo.
+
+
+Fluxo alternativo:
+1. usuário: clica no botão de menu.
+2. usuário: clica no botão de criação de grupo.
+3. sistema: exibe janela de criação de grupo.
+4. usuário: cancela criação de grupo.
+5. sistema: fecha janela de criação de grupo.
+
+
+
+> **Caso de uso: Editar contato**
+
+Condições:
+1. Usuário logado.
+2. contato criado.
+
+
+Fluxo principal:
+1. usuário: clica no contato por 1 segundo.
+2. sistema: exibe janela de edição de contato.
+3. usuário: insere e salva novas informações de contato.
+4. sistema: atualiza contato no banco de dados.
+5. sistema: fecha janela de edição de contato.
+
+
+Fluxo alternativo:
+1. usuário: clica no contato por 1 segundo.
+2. sistema: exibe janela de edição de contato.
+3. usuário: cancela edição de contato.
+4. sistema: fecha janela de edição de contato.
+
+
+
+> **Caso de uso: Editar grupo
+
+Condições:
+1. Usuário logado.
+2. grupo criado.
+
+
+Fluxo principal:
+1. usuário: clica no grupo por 1 segundo.
+2. sistema: exibe janela de edição de grupo.
+3. usuário: insere e salva novas informações de grupo.
+4. sistema: atualiza grupo no banco de dados.
+5. sistema: fecha janela de edição de grupo.
+
+
+Fluxo alternativo:
+1. usuário: clica no grupo por 1 segundo.
+2. sistema: exibe janela de edição de grupo.
+3. usuário: cancela edição de grupo.
+4. sistema: fecha janela de edição de grupo.
 
 b) Sequência
 ![Diagrama de sequência 01](https://user-images.githubusercontent.com/42116724/125643459-8ffd29d0-6053-463f-bb91-d18c5ac9e8f3.png)
