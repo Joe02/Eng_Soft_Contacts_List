@@ -14,6 +14,10 @@ Draw.io: https://app.diagrams.net <br>
 ## Resumo:
 #### Nosso aplicativo se sustena na criação de uma agenda pessoal aonde um usuário pode salvar seus contatos, salvá-los em grupos, editar as informações de ambos contatos e ou grupos e ter acesso à essas informações em qualquer dispositivo, tendo em vista que essas informações são salvas em nuvem.
 
+## Como baixar a apk de teste?
+> Nos arquivos do projeto acesse a pasta 'Build/App/Outputs/flutter-apk/ e baixe o arquivo app.apk
+> Também é possível baixar o aplicativo através da pasta 'Build/App/Outputs/apk/debug/ baixando o arquivo app-debug.apk
+
 ## 1) Elaborar o documento de especificação de requisitos com base no modelo disponibilizado pelo professor. 
 > ## Contato
 - [X] Criar contato
@@ -54,6 +58,12 @@ c) Atividade
 
 e) Estado
 ![Diagrama de estado](https://user-images.githubusercontent.com/42116724/125643456-97b9d859-3dbf-421e-8c09-e1196d062642.png)
+
+f) Implantação <br>
+![image](https://user-images.githubusercontent.com/42116724/125655992-209cf8c1-13a8-49d8-b4c4-1fae33a09047.png)
+
+g) Componentes <br>
+![eng_soft_agenda (2)](https://user-images.githubusercontent.com/42116724/125658412-b1c61c2c-0c23-4b4a-bb11-8a1c72f92953.png)
 
 ## 4) Implementação Parte I
 
