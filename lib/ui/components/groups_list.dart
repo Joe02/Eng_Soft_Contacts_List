@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eng_soft_contacts_list/ui/data/group.dart';
 import 'package:eng_soft_contacts_list/ui/screens/edit_contact_or_group_screen.dart';
+import 'package:eng_soft_contacts_list/utils/providers/contact_provider.dart';
 import 'package:eng_soft_contacts_list/utils/providers/group_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,12 +92,17 @@ class GroupsListState extends State<GroupsList> {
                           onLongPress: () {
                             var groupProvider =
                                 Provider.of<GroupProvider>(context, listen: false);
-                            groupProvider.globalGroup.name =
+                            groupProvider.globalGroup = Group();
+                            groupProvider.globalGroup!.name =
                                 groupsAuxList[index]['nome do grupo'];
-                            groupProvider.globalGroup.description =
+                            groupProvider.globalGroup!.description =
                                 groupsAuxList[index]['descrição do grupo'];
-                            groupProvider.globalGroup.contactsList =
+                            groupProvider.globalGroup!.contactsList =
                                 groupsAuxList[index]['membros'];
+
+                            var contactProvider =
+                            Provider.of<ContactProvider>(context, listen: false);
+                            contactProvider.globalContact = null;
                             Navigator.push(
                               context,
                               MaterialPageRoute(

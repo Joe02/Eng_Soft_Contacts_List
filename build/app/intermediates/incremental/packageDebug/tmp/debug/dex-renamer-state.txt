@@ -1,4 +1,4 @@
-#Tue Jul 13 18:31:34 BRT 2021
+#Tue Jul 13 18:49:15 BRT 2021
 base.2=/home/lala/Desktop/Eng_Soft_Contacts_List/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
 path.2=classes3.dex
 base.1=/home/lala/Desktop/Eng_Soft_Contacts_List/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex

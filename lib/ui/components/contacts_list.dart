@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eng_soft_contacts_list/ui/data/contact.dart';
 import 'package:eng_soft_contacts_list/ui/screens/edit_contact_or_group_screen.dart';
 import 'package:eng_soft_contacts_list/utils/providers/contact_provider.dart';
+import 'package:eng_soft_contacts_list/utils/providers/group_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -107,14 +108,15 @@ class ContactsListState extends State<ContactsList> {
                         return GestureDetector(
                           onLongPress: () {
                             var contactProvider =
-                                Provider.of<ContactProvider>(context);
-                            contactProvider.globalContact.name =
+                                Provider.of<ContactProvider>(context, listen: false);
+                            contactProvider.globalContact = Contact();
+                            contactProvider.globalContact!.name =
                                 contactsAuxList[index]['nome do contato'];
-                            contactProvider.globalContact.number =
+                            contactProvider.globalContact!.number =
                                 contactsAuxList[index]['número do contato'];
-                            contactProvider.globalContact.notes =
+                            contactProvider.globalContact!.notes =
                                 contactsAuxList[index]['notas sobre contato'];
-                            contactProvider.globalContact.birthday =
+                            contactProvider.globalContact!.birthday =
                                 contactsAuxList[index]['CEP'];
                             Navigator.push(
                                 context,
@@ -122,6 +124,10 @@ class ContactsListState extends State<ContactsList> {
                                     builder: (context) =>
                                         EditContactOrGroupScreen(
                                             widget.contactNameOrEmail)));
+
+                            var groupProvider =
+                            Provider.of<GroupProvider>(context, listen: false);
+                            groupProvider.globalGroup = null;
                           },
                           onTap: () {
                             widgetSetState(() {

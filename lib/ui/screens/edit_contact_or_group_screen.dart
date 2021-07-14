@@ -70,9 +70,9 @@ class EditContactOrGroupScreen extends StatelessWidget {
                             .doc('${contactProvider.globalContact!.number}')
                             .set({
                             'nome do contato':
-                                '${firstController.text.isEmpty ? groupProvider.globalGroup.name : firstController.text}',
+                                '${firstController.text.isEmpty ? groupProvider.globalGroup!.name : firstController.text}',
                             'número do contato':
-                                '${secondController.text.isEmpty ? groupProvider.globalGroup.description : secondController.text}',
+                                '${secondController.text.isEmpty ? groupProvider.globalGroup!.description : secondController.text}',
                           });
                     // Navigator.pop(context);
                   },
@@ -95,7 +95,7 @@ class EditContactOrGroupScreen extends StatelessWidget {
                           controller: firstController,
                           decoration: InputDecoration(
                               hintText: contactProvider.globalContact == null
-                                  ? groupProvider.globalGroup.name
+                                  ? groupProvider.globalGroup!.name
                                   : contactProvider.globalContact!.name),
                         ),
                       ),
@@ -107,7 +107,7 @@ class EditContactOrGroupScreen extends StatelessWidget {
                           controller: secondController,
                           decoration: InputDecoration(
                               hintText: contactProvider.globalContact == null
-                                  ? groupProvider.globalGroup.description
+                                  ? groupProvider.globalGroup!.description
                                   : contactProvider.globalContact!.number),
                         ),
                       ),
@@ -179,14 +179,14 @@ class EditContactOrGroupScreen extends StatelessWidget {
                                                           .collection(
                                                               "${userName}_grupos")
                                                           .doc(
-                                                              "${groupProvider.globalGroup.name}")
+                                                              "${groupProvider.globalGroup!.name}")
                                                           .update({
                                                         'nome do grupo':
-                                                            '${groupProvider.globalGroup.name}',
+                                                            '${groupProvider.globalGroup!.name}',
                                                         'descrição do grupo':
-                                                            '${groupProvider.globalGroup.description}',
+                                                            '${groupProvider.globalGroup!.description}',
                                                         'membros': FieldValue
-                                                            .arrayUnion([ "${contactProvider.globalContact.name} - ${contactProvider.globalContact.number}"
+                                                            .arrayUnion([ "${contactProvider.globalContact!.name} - ${contactProvider.globalContact!.number}"
                                                         ])
                                                       });
                                                     } else {
@@ -195,14 +195,14 @@ class EditContactOrGroupScreen extends StatelessWidget {
                                                           .collection(
                                                               "${userName}_grupos")
                                                           .doc(
-                                                              "${groupProvider.globalGroup.name}")
+                                                              "${groupProvider.globalGroup!.name}")
                                                           .update({
                                                         'nome do grupo':
-                                                            '${groupProvider.globalGroup.name}',
+                                                            '${groupProvider.globalGroup!.name}',
                                                         'descrição do grupo':
-                                                            '${groupProvider.globalGroup.description}',
+                                                            '${groupProvider.globalGroup!.description}',
                                                         'membros': FieldValue
-                                                            .arrayUnion([ "${contactProvider.globalContact.name} - ${contactProvider.globalContact.number}"
+                                                            .arrayUnion([ "${contactProvider.globalContact!.name} - ${contactProvider.globalContact!.number}"
                                                         ])
                                                       });
                                                     }
