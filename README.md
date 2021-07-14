@@ -19,6 +19,7 @@ Draw.io: https://app.diagrams.net <br>
 ## Como baixar a apk de teste?
 > Nos arquivos do projeto acesse a pasta '**Build/App/Outputs/flutter-apk/**' e baixe o arquivo app.apk
 > Também é possível baixar o aplicativo através da pasta '**Build/App/Outputs/apk/debug/**' baixando o arquivo app-debug.apk
+> Ou mesmo baixar a apk diretamente pelo link: https://drive.google.com/file/d/1E5sXj61dAFr5lEYqPR6vAGh8sLC-TISj/view
 
 ## 1) Elaborar o documento de especificação de requisitos com base no modelo disponibilizado pelo professor. 
 ### Funcionais
