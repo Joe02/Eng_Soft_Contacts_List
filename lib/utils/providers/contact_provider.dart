@@ -4,6 +4,6 @@ import 'package:flutter/foundation.dart';
 
 class ContactProvider with ChangeNotifier, DiagnosticableTreeMixin {
 
-  late Contact globalContact;
+  Contact? globalContact;
 
 }

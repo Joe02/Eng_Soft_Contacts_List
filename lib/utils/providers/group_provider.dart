@@ -4,6 +4,6 @@ import 'package:flutter/foundation.dart';
 
 class GroupProvider with ChangeNotifier, DiagnosticableTreeMixin {
 
-  var globalGroup = Group();
+  Group? globalGroup;
 
 }

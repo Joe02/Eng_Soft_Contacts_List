@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eng_soft_contacts_list/ui/data/group.dart';
 import 'package:eng_soft_contacts_list/ui/screens/edit_contact_or_group_screen.dart';
+import 'package:eng_soft_contacts_list/utils/providers/contact_provider.dart';
 import 'package:eng_soft_contacts_list/utils/providers/group_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,11 +42,11 @@ class GroupsListState extends State<GroupsList> {
                 return element['nome do grupo']
                         .toString()
                         .toLowerCase()
-                        .contains(searchController.text) ||
+                        .contains(searchController.text.toLowerCase()) ||
                     element['descrição do grupo']
                         .toString()
                         .toLowerCase()
-                        .contains(searchController.text);
+                        .contains(searchController.text.toLowerCase());
               }).toList();
             }
             return Column(
@@ -89,19 +90,19 @@ class GroupsListState extends State<GroupsList> {
                         itemCount: groupsAuxList.length,
                         itemBuilder: (ctx, index) => GestureDetector(
                           onLongPress: () {
-                            var groupProvider =
-                                Provider.of<GroupProvider>(context, listen: false);
-                            groupProvider.globalGroup.name =
+                            var group = Group();
+                            group.name =
                                 groupsAuxList[index]['nome do grupo'];
-                            groupProvider.globalGroup.description =
+                            group.description =
                                 groupsAuxList[index]['descrição do grupo'];
-                            groupProvider.globalGroup.contactsList =
+                            group.contactsList =
                                 groupsAuxList[index]['membros'];
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (widgetContext) => EditContactOrGroupScreen(
-                                    widget.contactNameOrEmail),
+                                    widget.contactNameOrEmail, null, group),
                               ),
                             );
                           },

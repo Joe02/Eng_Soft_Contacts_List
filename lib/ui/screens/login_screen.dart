@@ -172,38 +172,44 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   displayLoginButton() {
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          this._currentlyLoading = true;
-        });
-        onLoginEvent();
-      },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
+    return StatefulBuilder(builder: (context, widgetSetState) {
+      return ElevatedButton(
+        onPressed: () {
+          widgetSetState(() {
+            this._currentlyLoading = true;
+          });
+          if (onLoginEvent(widgetSetState) == false) {
+            widgetSetState(() {
+              this._currentlyLoading = false;
+            });
+          }
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
           ),
         ),
-      ),
-      child: _currentlyLoading
-          ? Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 23.0, vertical: 5.5),
-              child: CircularProgressIndicator(
-                color: Colors.white,
+        child: _currentlyLoading
+            ? Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 23.0, vertical: 5.5),
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              )
+            : Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16),
+                child: Text(CustomStrings.confirmLabel),
               ),
-            )
-          : Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16),
-              child: Text(CustomStrings.confirmLabel),
-            ),
-    );
+      );
+    });
   }
 
-  onLoginEvent() async {
+  onLoginEvent(widgetSetState) async {
     bool emailValid = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
     ).hasMatch(userController.text);
@@ -220,15 +226,15 @@ class LoginScreenState extends State<LoginScreen> {
           );
         } else {
           CustomSnackBar().fastSnackBar(context, CustomStrings.onLoginError);
-          _currentlyLoading = false;
+          return false;
         }
       } else {
         CustomSnackBar().fastSnackBar(context, CustomStrings.onSmallPassword);
-        _currentlyLoading = false;
+        return false;
       }
     } else {
       CustomSnackBar().fastSnackBar(context, CustomStrings.onIncorrectEmail);
-      _currentlyLoading = false;
+      return false;
     }
   }
 
