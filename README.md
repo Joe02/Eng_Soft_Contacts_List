@@ -1,8 +1,10 @@
 # Agenda: Projeto criado para a cadeira de Engenharia de Software!
 
-## Ferramentas utilizadas: Flutter Framework (2.2.3), Figma (Wireframes) e Draw.io
+## Ferramentas utilizadas: Flutter Framework (2.2.3), Figma (Wireframes), Smartdraw, Lucidchart e Draw.io
 Flutter: https://https://flutter.dev <br>
 Figma: https://www.figma.com <br>
+Smartdraw: https://www.smartdraw.com/ <br>
+Lucidchart: https://www.lucidchart.com/ <br>
 Draw.io: https://app.diagrams.net <br>
 
 ## Equipe:
@@ -53,7 +55,7 @@ Draw.io: https://app.diagrams.net <br>
 ![image](https://user-images.githubusercontent.com/42116724/125640787-e2ec5ac2-cb14-4b4b-8af7-846bca22ed27.png)
 
 ## 3) UML
-a) Casos de uso
+a) Desenvolver os casos de uso do sistema.
 ![Diagrama de casos de uso](https://user-images.githubusercontent.com/42116724/125643454-6cdff0c6-37a0-4901-bec8-a2250de4a0ba.png)
 > **Caso de uso: Fazer login**
 
@@ -154,6 +156,7 @@ Fluxo alternativo:
 Condições:
 1. Usuário logado.
 2. contato criado.
+3. aba de contatos aberta.
 
 
 Fluxo principal:
@@ -172,11 +175,12 @@ Fluxo alternativo:
 
 
 
-> **Caso de uso: Editar grupo
+> **Caso de uso: Editar grupo**
 
 Condições:
 1. Usuário logado.
 2. grupo criado.
+3. aba de grupos aberta.
 
 
 Fluxo principal:
@@ -193,22 +197,90 @@ Fluxo alternativo:
 3. usuário: cancela edição de grupo.
 4. sistema: fecha janela de edição de grupo.
 
-b) Sequência
+
+
+> **Caso de uso: Excluir contato**
+
+Condições:
+1. Usuário logado.
+2. contato criado.
+3. aba de contatos aberta.
+
+
+Fluxo principal:
+1. usuário: arrasta contato para esquerda ou direita.
+2. sistema: exclui contato da lista de contatos.
+
+
+
+> **Caso de uso: Excluir grupo**
+
+Condições:
+1. Usuário logado.
+2. grupo criado.
+3. aba de grupos aberta.
+
+
+Fluxo principal:
+1. usuário: arrasta grupo para esquerda ou direita.
+2. sistema: exclui grupo da lista de grupos.
+
+
+
+> **Caso de uso: Buscar contato**
+
+Condições:
+1. Usuário logado.
+2. contato criado.
+3. aba de contatos aberta.
+
+
+Fluxo principal:
+1. usuário: insere termo de busca na barra de pesquisa.
+2. sistema: exibe aba de contatos com listagem filtrada pelo termo.
+
+
+
+> **Caso de uso: Buscar grupo**
+
+Condições:
+1. Usuário logado.
+2. grupo criado.
+3. aba de grupos aberta.
+
+
+Fluxo principal:
+1. usuário: insere termo de busca na barra de pesquisa.
+2. sistema: exibe aba de grupos com listagem filtrada pelo termo.
+
+
+
+> **Caso de uso: Fazer logout**
+
+Condições:
+1. Usuário logado.
+
+
+Fluxo principal:
+1. usuário: insere termo de busca na barra de pesquisa.
+2. sistema: exibe aba de grupos com listagem filtrada pelo termo.
+
+b) Elaborar diagramas de sequência para os casos de uso mais importantes. <br>
 ![Diagrama de sequência 01](https://user-images.githubusercontent.com/42116724/125643459-8ffd29d0-6053-463f-bb91-d18c5ac9e8f3.png)
 ![Diagrama de sequência 02](https://user-images.githubusercontent.com/42116724/125643460-58141172-21a8-47bd-81e4-d3e2932a8cff.png)
 
-c) Atividade
+c) Elaborar diagramas de atividade.
 ![Diagrama de atividades 01](https://user-images.githubusercontent.com/42116724/125643448-2f9d2b5c-eb8a-4a6c-a67d-0b7f0c324244.png)
 ![Diagrama de atividades 02](https://user-images.githubusercontent.com/42116724/125643452-43f51888-059d-4cc8-86b0-b15cc1b51cdb.png)
 
-e) Estado
+e) Elaborar os diagramas de estado de um objeto Conta.
 ![Diagrama de estado](https://user-images.githubusercontent.com/42116724/125643456-97b9d859-3dbf-421e-8c09-e1196d062642.png)
 
-f) Implantação <br>
-![image](https://user-images.githubusercontent.com/42116724/125655992-209cf8c1-13a8-49d8-b4c4-1fae33a09047.png)
-
-g) Componentes <br>
+f) Diagrama de componentes <br>
 ![eng_soft_agenda (2)](https://user-images.githubusercontent.com/42116724/125658412-b1c61c2c-0c23-4b4a-bb11-8a1c72f92953.png)
+
+g) Elaborar os diagramas de implantação <br>
+![image](https://user-images.githubusercontent.com/42116724/125655992-209cf8c1-13a8-49d8-b4c4-1fae33a09047.png)
 
 ## 4) Implementação Parte I
 
