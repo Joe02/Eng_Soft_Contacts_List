@@ -107,23 +107,21 @@ class ContactsListState extends State<ContactsList> {
                           builder: (widgetContext, widgetSetState) {
                         return GestureDetector(
                           onLongPress: () {
-                            var contactProvider =
-                                Provider.of<ContactProvider>(context, listen: false);
-                            contactProvider.globalContact = Contact();
-                            contactProvider.globalContact!.name =
+                            var contact = Contact();
+                            contact.name =
                                 contactsAuxList[index]['nome do contato'];
-                            contactProvider.globalContact!.number =
+                            contact.number =
                                 contactsAuxList[index]['número do contato'];
-                            contactProvider.globalContact!.notes =
+                            contact.notes =
                                 contactsAuxList[index]['notas sobre contato'];
-                            contactProvider.globalContact!.birthday =
+                            contact.birthday =
                                 contactsAuxList[index]['CEP'];
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         EditContactOrGroupScreen(
-                                            widget.contactNameOrEmail)));
+                                            widget.contactNameOrEmail, contact, null)));
 
                             var groupProvider =
                             Provider.of<GroupProvider>(context, listen: false);

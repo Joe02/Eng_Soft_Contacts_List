@@ -90,24 +90,19 @@ class GroupsListState extends State<GroupsList> {
                         itemCount: groupsAuxList.length,
                         itemBuilder: (ctx, index) => GestureDetector(
                           onLongPress: () {
-                            var groupProvider =
-                                Provider.of<GroupProvider>(context, listen: false);
-                            groupProvider.globalGroup = Group();
-                            groupProvider.globalGroup!.name =
+                            var group = Group();
+                            group.name =
                                 groupsAuxList[index]['nome do grupo'];
-                            groupProvider.globalGroup!.description =
+                            group.description =
                                 groupsAuxList[index]['descrição do grupo'];
-                            groupProvider.globalGroup!.contactsList =
+                            group.contactsList =
                                 groupsAuxList[index]['membros'];
 
-                            var contactProvider =
-                            Provider.of<ContactProvider>(context, listen: false);
-                            contactProvider.globalContact = null;
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (widgetContext) => EditContactOrGroupScreen(
-                                    widget.contactNameOrEmail),
+                                    widget.contactNameOrEmail, null, group),
                               ),
                             );
                           },

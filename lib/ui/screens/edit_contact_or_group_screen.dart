@@ -9,8 +9,10 @@ import 'package:provider/provider.dart';
 
 class EditContactOrGroupScreen extends StatelessWidget {
   var userName;
+  var contact;
+  var group;
 
-  EditContactOrGroupScreen(this.userName);
+  EditContactOrGroupScreen(this.userName, this.contact, this.group);
 
   var firstController = TextEditingController();
   var secondController = TextEditingController();
@@ -19,14 +21,12 @@ class EditContactOrGroupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var groupProvider = Provider.of<GroupProvider>(context);
-    var contactProvider = Provider.of<ContactProvider>(context);
 
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
 
     return StreamBuilder(
-      stream: contactProvider.globalContact == null
+      stream: contact == null
           ? FirebaseFirestore.instance
               .collection('${userName}_grupos')
               .snapshots()
@@ -39,7 +39,7 @@ class EditContactOrGroupScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.orange,
               title: Text(
-                "Edição de ${contactProvider.globalContact == null ? "Grupo" : "Contato"}",
+                "Edição de ${contact == null ? "Grupo" : "Contato"}",
                 style: TextStyle(color: Colors.white),
               ),
               actions: [
@@ -47,32 +47,31 @@ class EditContactOrGroupScreen extends StatelessWidget {
                   onPressed: () {
                     FirebaseFirestore.instance
                         .collection("${userName}_contatos")
-                        .doc('${contactProvider.globalContact!.number}')
+                        .doc('${contact!.number}')
                         .delete();
 
-                    contactProvider.globalContact != null
+                    contact != null
                         ? FirebaseFirestore.instance
                             .collection("${userName}_contatos")
-                            .doc(
-                                '${secondController.text != contactProvider.globalContact!.number ? secondController.text : contactProvider.globalContact!.number}')
+                            .doc('${secondController.text.isEmpty ? contact!.number : secondController.text}')
                             .set({
                             'nome do contato':
-                                '${firstController.text.isEmpty ? contactProvider.globalContact!.name != null ? contactProvider.globalContact!.name : "" : firstController.text}',
+                                '${firstController.text.isEmpty ? contact!.name : firstController.text}',
                             'número do contato':
-                                '${secondController.text.isEmpty ? contactProvider.globalContact!.number != null ? contactProvider.globalContact!.number : "" : secondController.text}',
+                                '${secondController.text.isEmpty ? contact!.number : secondController.text}',
                             'notas sobre contato':
-                                '${thirdController.text.isEmpty ? contactProvider.globalContact!.notes != null ? contactProvider.globalContact!.notes : "" : thirdController.text}',
-                            'data de nascimento':
-                                '${fourthController.text.isEmpty ? contactProvider.globalContact!.birthday != null ? contactProvider.globalContact!.birthday : "" : fourthController.text}'
+                                '${thirdController.text.isEmpty ? contact!.notes : thirdController.text}',
+                            'CEP':
+                                '${fourthController.text.isEmpty ? contact!.birthday : fourthController.text}'
                           })
                         : FirebaseFirestore.instance
                             .collection("${userName}_contatos")
-                            .doc('${contactProvider.globalContact!.number}')
+                            .doc('${contact!.number}')
                             .set({
                             'nome do contato':
-                                '${firstController.text.isEmpty ? groupProvider.globalGroup!.name : firstController.text}',
+                                '${firstController.text.isEmpty ? group!.name : firstController.text}',
                             'número do contato':
-                                '${secondController.text.isEmpty ? groupProvider.globalGroup!.description : secondController.text}',
+                                '${secondController.text.isEmpty ? group!.description : secondController.text}',
                           });
                     // Navigator.pop(context);
                   },
@@ -94,9 +93,9 @@ class EditContactOrGroupScreen extends StatelessWidget {
                         child: TextField(
                           controller: firstController,
                           decoration: InputDecoration(
-                              hintText: contactProvider.globalContact == null
-                                  ? groupProvider.globalGroup!.name
-                                  : contactProvider.globalContact!.name),
+                              hintText: contact == null
+                                  ? group!.name
+                                  : contact!.name),
                         ),
                       ),
                     ),
@@ -106,24 +105,24 @@ class EditContactOrGroupScreen extends StatelessWidget {
                         child: TextField(
                           controller: secondController,
                           decoration: InputDecoration(
-                              hintText: contactProvider.globalContact == null
-                                  ? groupProvider.globalGroup!.description
-                                  : contactProvider.globalContact!.number),
+                              hintText: contact == null
+                                  ? group!.description
+                                  : contact!.number),
                         ),
                       ),
                     ),
                     Card(
                       child: Visibility(
                         visible:
-                            contactProvider.globalContact == null ? false : true,
+                            contact == null ? false : true,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
                             controller: thirdController,
                             decoration: InputDecoration(
-                                hintText: contactProvider.globalContact == null
+                                hintText: contact == null
                                     ? ""
-                                    : contactProvider.globalContact!.notes),
+                                    : contact!.notes),
                           ),
                         ),
                       ),
@@ -131,21 +130,21 @@ class EditContactOrGroupScreen extends StatelessWidget {
                     Card(
                       child: Visibility(
                         visible:
-                            contactProvider.globalContact == null ? false : true,
+                            contact == null ? false : true,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
                             controller: fourthController,
                             decoration: InputDecoration(
-                                hintText: contactProvider.globalContact == null
+                                hintText: contact == null
                                     ? ""
-                                    : contactProvider.globalContact!.birthday),
+                                    : contact!.birthday),
                           ),
                         ),
                       ),
                     ),
                     Visibility(
-                      visible: contactProvider.globalContact == null,
+                      visible: contact == null,
                       child: StreamBuilder(
                         stream: FirebaseFirestore.instance
                             .collection('${userName}_contatos')
@@ -168,7 +167,7 @@ class EditContactOrGroupScreen extends StatelessWidget {
                                           child: ListTile(
                                             key: Key(index.toString()),
                                             leading: StatefulBuilder(
-                                                builder: (context,
+                                                builder: (widgetContext,
                                                     widgetSetState) {
                                               return Checkbox(
                                                 onChanged: (bool? value) {
@@ -179,14 +178,14 @@ class EditContactOrGroupScreen extends StatelessWidget {
                                                           .collection(
                                                               "${userName}_grupos")
                                                           .doc(
-                                                              "${groupProvider.globalGroup!.name}")
+                                                              "${group!.name}")
                                                           .update({
                                                         'nome do grupo':
-                                                            '${groupProvider.globalGroup!.name}',
+                                                            '${group!.name}',
                                                         'descrição do grupo':
-                                                            '${groupProvider.globalGroup!.description}',
+                                                            '${group!.description}',
                                                         'membros': FieldValue
-                                                            .arrayUnion([ "${contactProvider.globalContact!.name} - ${contactProvider.globalContact!.number}"
+                                                            .arrayUnion([ "${secondStream.data!.docs[index]['nome do contato']} - ${secondStream.data!.docs[index]['número do contato']}"
                                                         ])
                                                       });
                                                     } else {
@@ -195,23 +194,20 @@ class EditContactOrGroupScreen extends StatelessWidget {
                                                           .collection(
                                                               "${userName}_grupos")
                                                           .doc(
-                                                              "${groupProvider.globalGroup!.name}")
+                                                              "${group!.name}")
                                                           .update({
                                                         'nome do grupo':
-                                                            '${groupProvider.globalGroup!.name}',
+                                                            '${group!.name}',
                                                         'descrição do grupo':
-                                                            '${groupProvider.globalGroup!.description}',
+                                                            '${group!.description}',
                                                         'membros': FieldValue
-                                                            .arrayUnion([ "${contactProvider.globalContact!.name} - ${contactProvider.globalContact!.number}"
+                                                            .arrayRemove([ "${secondStream.data!.docs[index]['nome do contato']} - ${secondStream.data!.docs[index]['número do contato']}"
                                                         ])
                                                       });
                                                     }
                                                   });
                                                 },
-                                                value: firstStream.data!
-                                                    .docs[index]['membros']
-                                                    .contains(
-                                                        "${secondStream.data!.docs[index]['nome do contato']} - ${secondStream.data!.docs[index]['número do contato']}"),
+                                                value: firstStream.data!.docs[index]['membros'].contains("${secondStream.data!.docs[index]['nome do contato']} - ${secondStream.data!.docs[index]['número do contato']}"),
                                               );
                                             }),
                                             title: Text(secondStream
