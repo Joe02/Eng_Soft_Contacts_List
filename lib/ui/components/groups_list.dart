@@ -42,11 +42,11 @@ class GroupsListState extends State<GroupsList> {
                 return element['nome do grupo']
                         .toString()
                         .toLowerCase()
-                        .contains(searchController.text) ||
+                        .contains(searchController.text.toLowerCase()) ||
                     element['descrição do grupo']
                         .toString()
                         .toLowerCase()
-                        .contains(searchController.text);
+                        .contains(searchController.text.toLowerCase());
               }).toList();
             }
             return Column(

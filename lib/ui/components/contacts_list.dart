@@ -42,19 +42,19 @@ class ContactsListState extends State<ContactsList> {
                 return element['nome do contato']
                         .toString()
                         .toLowerCase()
-                        .contains(searchController.text) ||
+                        .contains(searchController.text.toLowerCase()) ||
                     element['número do contato']
                         .toString()
                         .toLowerCase()
-                        .contains(searchController.text) ||
+                        .contains(searchController.text.toLowerCase()) ||
                     element['notas sobre contato']
                         .toString()
                         .toLowerCase()
-                        .contains(searchController.text) ||
+                        .contains(searchController.text.toLowerCase()) ||
                     element['CEP']
                         .toString()
                         .toLowerCase()
-                        .contains(searchController.text);
+                        .contains(searchController.text.toLowerCase());
               }).toList();
             }
             return Column(
