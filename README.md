@@ -15,8 +15,8 @@ Draw.io: https://app.diagrams.net <br>
 #### Nosso aplicativo se sustena na criação de uma agenda pessoal aonde um usuário pode salvar seus contatos, salvá-los em grupos, editar as informações de ambos contatos e ou grupos e ter acesso à essas informações em qualquer dispositivo, tendo em vista que essas informações são salvas em nuvem.
 
 ## Como baixar a apk de teste?
-> Nos arquivos do projeto acesse a pasta 'Build/App/Outputs/flutter-apk/ e baixe o arquivo app.apk
-> Também é possível baixar o aplicativo através da pasta 'Build/App/Outputs/apk/debug/ baixando o arquivo app-debug.apk
+> Nos arquivos do projeto acesse a pasta '**Build/App/Outputs/flutter-apk/**' e baixe o arquivo app.apk
+> Também é possível baixar o aplicativo através da pasta '**Build/App/Outputs/apk/debug/**' baixando o arquivo app-debug.apk
 
 ## 1) Elaborar o documento de especificação de requisitos com base no modelo disponibilizado pelo professor. 
 > ## Contato
